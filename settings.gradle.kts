@@ -2,13 +2,7 @@
 rootProject.name = "coupon-issuance"
 
 include(
-    "core:core-enum",
     "core:core-api",
-    "storage:db-core",
-    "tests:api-docs",
-    "support:logging",
-    "support:monitoring",
-    "support:cloud-config",
     "clients:client-example"
 )
 
