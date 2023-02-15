@@ -1,0 +1,13 @@
+# GET
+curl --location --request GET 'localhost:8080/get/1?exampleParam=12345' \
+--header 'Content-Type: application/json' \
+--data-raw ''
+
+
+# POST
+curl --location --request POST 'localhost:8080/post' \
+--header 'Content-Type: application/json' \
+--header 'X-USER-ID: 12345' \
+--data-raw '{
+    "data" : "12345"
+}'
