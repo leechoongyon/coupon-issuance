@@ -28,4 +28,6 @@ pluginManagement {
         }
     }
 }
-
+include("storage")
+include("storage:db-core")
+findProject(":storage:db-core")?.name = "db-core"
