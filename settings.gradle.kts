@@ -1,10 +1,5 @@
 rootProject.name = "coupon-issuance-toy-project"
 
-include(
-    "core:core-api",
-    "clients:client-example"
-)
-
 pluginManagement {
     val kotlinVersion: String by settings
     val springBootVersion: String by settings
@@ -27,6 +22,28 @@ pluginManagement {
         }
     }
 }
-include("storage")
-include("storage:db-core")
-findProject(":storage:db-core")?.name = "db-core"
+
+include("coupon-issuance-request")
+include("coupon-issuance-request:core")
+findProject(":coupon-issuance-request:core")?.name = "core"
+include("coupon-issuance-request:core:core-api")
+findProject(":coupon-issuance-request:core:core-api")?.name = "core-api"
+include("coupon-issuance-request:storage")
+findProject(":coupon-issuance-request:storage")?.name = "storage"
+include("coupon-issuance-request:clients")
+findProject(":coupon-issuance-request:clients")?.name = "clients"
+include("coupon-issuance")
+include("coupon-issuance:core")
+findProject(":coupon-issuance:core")?.name = "core"
+include("coupon-issuance:core:core-api")
+findProject(":coupon-issuance:core:core-api")?.name = "core-api"
+include("coupon-issuance:storage")
+findProject(":coupon-issuance:storage")?.name = "storage"
+include("coupon-issuance:clients")
+findProject(":coupon-issuance:clients")?.name = "clients"
+include("coupon-issuance:clients")
+findProject(":coupon-issuance:clients")?.name = "clients"
+include("coupon-issuance:storage:db-core")
+findProject(":coupon-issuance:storage:db-core")?.name = "db-core"
+include("coupon-issuance-request:storage:db-core")
+findProject(":coupon-issuance-request:storage:db-core")?.name = "db-core"
