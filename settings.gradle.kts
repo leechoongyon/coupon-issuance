@@ -1,5 +1,4 @@
-
-rootProject.name = "coupon-issuance"
+rootProject.name = "coupon-issuance-toy-project"
 
 include(
     "core:core-api",
