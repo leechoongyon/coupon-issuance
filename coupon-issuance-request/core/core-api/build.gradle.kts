@@ -7,5 +7,9 @@ tasks.getByName("jar") {
 }
 
 dependencies {
+    implementation(project(":coupon-issuance-request:storage:db-core"))
+
+    testImplementation(project(":coupon-issuance-request:tests:api-docs"))
+
     implementation("org.springframework.boot:spring-boot-starter-web")
 }

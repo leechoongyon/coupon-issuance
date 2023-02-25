@@ -47,3 +47,9 @@ include("coupon-issuance:storage:db-core")
 findProject(":coupon-issuance:storage:db-core")?.name = "db-core"
 include("coupon-issuance-request:storage:db-core")
 findProject(":coupon-issuance-request:storage:db-core")?.name = "db-core"
+include("coupon-issuance-request:tests")
+findProject(":coupon-issuance-request:tests")?.name = "tests"
+include("coupon-issuance:tests")
+findProject(":coupon-issuance:tests")?.name = "tests"
+include("coupon-issuance-request:tests:api-docs")
+findProject(":coupon-issuance-request:tests:api-docs")?.name = "api-docs"
