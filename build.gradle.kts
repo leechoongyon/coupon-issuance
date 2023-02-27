@@ -8,10 +8,9 @@ plugins {
     id("org.springframework.boot") apply false
     id("io.spring.dependency-management")
     id("org.asciidoctor.jvm.convert") apply false
-    id("org.jmailen.kotlinter") apply false
 }
 
-java.sourceCompatibility = JavaVersion.VERSION_17
+java.sourceCompatibility = JavaVersion.VERSION_19
 
 allprojects {
     group = "${property("projectGroup")}"
@@ -25,6 +24,7 @@ allprojects {
 
 
 subprojects {
+    apply(plugin = "kotlin-kapt")
     apply(plugin = "org.jetbrains.kotlin.jvm")
     apply(plugin = "org.jetbrains.kotlin.kapt")
     apply(plugin = "org.jetbrains.kotlin.plugin.spring")
@@ -32,7 +32,6 @@ subprojects {
     apply(plugin = "org.springframework.boot")
     apply(plugin = "io.spring.dependency-management")
     apply(plugin = "org.asciidoctor.jvm.convert")
-    apply(plugin = "org.jmailen.kotlinter")
 
     dependencyManagement {
         imports {
@@ -47,7 +46,13 @@ subprojects {
         testImplementation("org.springframework.boot:spring-boot-starter-test")
         testImplementation("com.ninja-squad:springmockk:${property("springMockkVersion")}")
         annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+
+        // mapstruct
+        annotationProcessor("org.mapstruct:mapstruct-processor:1.5.2.Final")
         kapt("org.springframework.boot:spring-boot-configuration-processor")
+        implementation("org.mapstruct:mapstruct:1.5.2.Final")
+        kapt("org.mapstruct:mapstruct-processor:1.5.2.Final")
+        kaptTest("org.mapstruct:mapstruct-processor:1.5.2.Final")
     }
 
     tasks.getByName("bootJar") {
