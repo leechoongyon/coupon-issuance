@@ -1,9 +1,10 @@
 package io.simple.coupon.core.api.controller.v1
 
 
+import io.mockk.every
 import io.mockk.mockk
 import io.restassured.http.ContentType
-import io.simple.coupon.core.api.controller.v1.request.CouponIssuanceRequestDto
+import io.simple.coupon.core.api.domain.CouponIssuanceRequestCommand
 import io.simple.coupon.core.api.domain.CouponIssuanceService
 import io.simple.coupon.test.RestDocsTest
 import io.simple.coupon.test.RestDocsUtils.requestPreprocessor
@@ -29,9 +30,15 @@ class CouponIssuanceControllerTest : RestDocsTest() {
 
     @Test
     fun testRequestCouponIssuance() {
+        every {
+            service.requestCouponIssuance(any())
+        } returns CouponIssuanceRequestCommand.Response(
+            "Hello World"
+        )
+
         given()
             .contentType(ContentType.JSON)
-            .body(CouponIssuanceRequestDto("Hello World"))
+            .body(CouponIssuanceDto.CouponIssuanceRequest("Hello World"))
             .post("/coupon/issuance/request")
             .then()
             .status(HttpStatus.OK)

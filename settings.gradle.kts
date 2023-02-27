@@ -5,7 +5,6 @@ pluginManagement {
     val springBootVersion: String by settings
     val springDependencyManagementVersion: String by settings
     val asciidoctorConvertVersion: String by settings
-    val kotlinterVersion: String by settings
 
     resolutionStrategy {
         eachPlugin {
@@ -17,7 +16,6 @@ pluginManagement {
                 "org.springframework.boot" -> useVersion(springBootVersion)
                 "io.spring.dependency-management" -> useVersion(springDependencyManagementVersion)
                 "org.asciidoctor.jvm.convert" -> useVersion(asciidoctorConvertVersion)
-                "org.jmailen.kotlinter" -> useVersion(kotlinterVersion)
             }
         }
     }
@@ -53,3 +51,5 @@ include("coupon-issuance:tests")
 findProject(":coupon-issuance:tests")?.name = "tests"
 include("coupon-issuance-request:tests:api-docs")
 findProject(":coupon-issuance-request:tests:api-docs")?.name = "api-docs"
+include("coupon-issuance-request:storage:redis-core")
+findProject(":coupon-issuance-request:storage:redis-core")?.name = "redis-core"
