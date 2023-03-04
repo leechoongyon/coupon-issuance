@@ -20,6 +20,8 @@ class CouponRedisRepository(
         if tonumber(count) >= 1000 then
             return 'FULL'
         end
+        local result = redis.call('ZADD', KEYS[1], ARGV[2], ARGV[3])
+        return 'ADD'
         """,
         String::class.java
     )
