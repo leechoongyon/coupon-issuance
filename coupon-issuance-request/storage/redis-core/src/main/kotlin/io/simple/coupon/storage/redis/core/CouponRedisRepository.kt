@@ -30,7 +30,7 @@ class CouponRedisRepository(
     fun requestIssueCoupon(userId: String): String? {
         val result: String? = redisTemplate.execute(
             addScript,
-            listOf("issued_coupons"),
+            listOf("coupon_issueance"),
             "1000",
             System.currentTimeMillis().toString(),
             userId
