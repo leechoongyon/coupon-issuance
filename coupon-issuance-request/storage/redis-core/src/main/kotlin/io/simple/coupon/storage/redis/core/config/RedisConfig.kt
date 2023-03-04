@@ -9,6 +9,7 @@ import org.springframework.data.redis.connection.RedisStandaloneConfiguration
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories
+import org.springframework.data.redis.serializer.StringRedisSerializer
 
 @Configuration
 @EnableRedisRepositories
@@ -25,22 +26,16 @@ class RedisConfig : CachingConfigurerSupport() {
 
     @Bean()
     fun jedisConnectionFactory(): JedisConnectionFactory {
-
         val redisStandaloneConfiguration = RedisStandaloneConfiguration(redisHost!!, redisPort)
         redisStandaloneConfiguration.setPassword(redisPassword)
-
         return JedisConnectionFactory(redisStandaloneConfiguration)
     }
 
     @Bean("redisTemplateWithJedis")
-    fun redisTemplateWithJedis(
-
-    ): RedisTemplate<*, *> {
+    fun redisTemplateWithJedis(): RedisTemplate<*, *> {
 
         val template = RedisTemplate<String, Any>()
-//        template.valueSerializer = GenericJackson2JsonRedisSerializer()
-//        template.hashKeySerializer = StringRedisSerializer()
-//        template.hashValueSerializer = GenericJackson2JsonRedisSerializer()
+        template.valueSerializer = StringRedisSerializer()
 
         template.setConnectionFactory(jedisConnectionFactory())
         template.setEnableTransactionSupport(true)
@@ -48,8 +43,5 @@ class RedisConfig : CachingConfigurerSupport() {
         return template
     }
 }
-
-
-
 
 

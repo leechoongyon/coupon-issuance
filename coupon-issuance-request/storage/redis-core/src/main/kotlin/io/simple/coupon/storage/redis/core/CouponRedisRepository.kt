@@ -1,10 +1,11 @@
 package io.simple.coupon.storage.redis.core
 
+import org.apache.logging.log4j.util.Strings
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.data.redis.core.script.DefaultRedisScript
 import org.springframework.data.redis.core.script.RedisScript
-import org.springframework.data.redis.serializer.StringRedisSerializer
 import org.springframework.stereotype.Repository
+import java.util.*
 
 @Repository
 class CouponRedisRepository(
@@ -26,19 +27,14 @@ class CouponRedisRepository(
         String::class.java
     )
 
-    init {
-        redisTemplate.valueSerializer = StringRedisSerializer()
-    }
-
-    fun requestIssueCoupon(userId: String): Boolean {
-        var score = System.currentTimeMillis().toString()
+    fun requestIssueCoupon(userId: String): String? {
         val result: String? = redisTemplate.execute(
             addScript,
             listOf("issued_coupons"),
             "1000",
-            score,
+            System.currentTimeMillis().toString(),
             userId
         )
-        return result != null && result != "FULL"
+        return Optional.ofNullable(result).orElse(Strings.EMPTY)
     }
 }

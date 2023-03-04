@@ -12,7 +12,6 @@ class CouponIssuanceService(
         request: CouponIssuanceRequestCommand.Request
     ): Response {
         var result = couponRedisRepository.requestIssueCoupon(request.data)
-        println("result : " + result)
         return CouponIssuanceRequestCommand.Response(request.data)
     }
 }
