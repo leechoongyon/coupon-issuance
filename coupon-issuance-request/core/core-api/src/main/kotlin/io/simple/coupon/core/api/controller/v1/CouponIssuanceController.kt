@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController
 class CouponIssuanceController(
     val couponIssuanceService: CouponIssuanceService
 ) {
-    @PostMapping("/coupon/issuance/request")
+    @PostMapping("api/v1/coupon/issuance/request")
     fun requestCouponIssuance(
         @RequestBody request: CouponIssuanceRequest
     ): ApiResponse<CouponIssuanceResponse> {

@@ -1,11 +1,10 @@
-spring.application.name: core-api
+spring.application.name: redis-core
 spring.profiles.active: local
 
 spring:
   config:
     import:
       - db-core.yml
-      - redis-core.yml
   mvc.throw-exception-if-no-handler-found: true
   web.resources.add-mappings: false
 

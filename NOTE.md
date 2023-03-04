@@ -26,3 +26,18 @@
 ### container 종료 명령어
 
 - docker stop [container id]
+
+# Redis 명령어
+
+### SortedSet 에서 우선순위가 가장 낮은 값 가져오기
+
+- ZRANGE "\xac\xed\x00\x05t\x00\x0eissued_coupons" 0 0 WITHSCORES
+  --> "1677895413694"
+
+### SortedSet 에서 SCORE 가져오기
+
+- ZSCORE "issued_coupons" "user1001"
+
+### Redis 모니터링
+
+- MONITOR 치면 OK 라고 나옴. redis 모니터링 가능
