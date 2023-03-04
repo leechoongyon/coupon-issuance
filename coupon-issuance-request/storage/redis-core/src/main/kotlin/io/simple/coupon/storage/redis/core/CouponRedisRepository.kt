@@ -8,15 +8,18 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class CouponRedisRepository(
-    private val redisTemplate: RedisTemplate<String, String>
+    private val redisTemplate: RedisTemplate<String, Any>
 ) {
     private val addScript: RedisScript<String> = DefaultRedisScript(
         """
+       local function isempty(s)
+            return s == nil or s == ''
+        end
+
         local count = redis.call('ZCARD', KEYS[1])
-        if count >= tonumber(ARGV[1]) then
+        if tonumber(count) >= 1000 then
             return 'FULL'
         end
-        return redis.call('ZADD', KEYS[1], ARGV[2], ARGV[3])
         """,
         String::class.java
     )
@@ -26,12 +29,13 @@ class CouponRedisRepository(
     }
 
     fun requestIssueCoupon(userId: String): Boolean {
+        var score = System.currentTimeMillis().toString()
         val result: String? = redisTemplate.execute(
             addScript,
             listOf("issued_coupons"),
-            1000.toString(),
-            userId,
-            System.currentTimeMillis().toDouble().toString()
+            "1000",
+            score,
+            userId
         )
         return result != null && result != "FULL"
     }

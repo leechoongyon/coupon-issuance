@@ -9,8 +9,6 @@ import org.springframework.data.redis.connection.RedisStandaloneConfiguration
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories
-import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer
-import org.springframework.data.redis.serializer.StringRedisSerializer
 
 @Configuration
 @EnableRedisRepositories
@@ -40,10 +38,9 @@ class RedisConfig : CachingConfigurerSupport() {
     ): RedisTemplate<*, *> {
 
         val template = RedisTemplate<String, Any>()
-        template.keySerializer = StringRedisSerializer()
-        template.valueSerializer = GenericJackson2JsonRedisSerializer()
-        template.hashKeySerializer = StringRedisSerializer()
-        template.hashValueSerializer = GenericJackson2JsonRedisSerializer()
+//        template.valueSerializer = GenericJackson2JsonRedisSerializer()
+//        template.hashKeySerializer = StringRedisSerializer()
+//        template.hashValueSerializer = GenericJackson2JsonRedisSerializer()
 
         template.setConnectionFactory(jedisConnectionFactory())
         template.setEnableTransactionSupport(true)
