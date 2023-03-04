@@ -8,6 +8,7 @@ tasks.getByName("jar") {
 
 dependencies {
     implementation(project(":coupon-issuance-request:storage:db-core"))
+    implementation(project(":coupon-issuance-request:support:logging"))
     implementation(project(":coupon-issuance-request:storage:redis-core"))
     testImplementation(project(":coupon-issuance-request:tests:api-docs"))
 

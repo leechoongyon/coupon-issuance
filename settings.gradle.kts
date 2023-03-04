@@ -53,3 +53,7 @@ include("coupon-issuance-request:tests:api-docs")
 findProject(":coupon-issuance-request:tests:api-docs")?.name = "api-docs"
 include("coupon-issuance-request:storage:redis-core")
 findProject(":coupon-issuance-request:storage:redis-core")?.name = "redis-core"
+include("coupon-issuance-request:support")
+findProject(":coupon-issuance-request:support")?.name = "support"
+include("coupon-issuance-request:support:logging")
+findProject(":coupon-issuance-request:support:logging")?.name = "logging"
