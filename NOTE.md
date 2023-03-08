@@ -38,6 +38,16 @@
 
 - ZSCORE "issued_coupons" "user1001"
 
+### SortedSet 에서 특정 key 개수
+
+- ZCARD "issued_coupons"
+  --> 1000
+
+### SortedSet 에서 특정 value 순위 (오름차순)
+
+- ZRANK "issued_coupons" user001
+  --> 5 (5번째)
+
 ### Redis 모니터링
 
 - MONITOR 치면 OK 라고 나옴. redis 모니터링 가능
