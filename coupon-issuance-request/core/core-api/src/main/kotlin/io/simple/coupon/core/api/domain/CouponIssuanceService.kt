@@ -11,7 +11,14 @@ class CouponIssuanceService(
     fun requestCouponIssuance(
         request: CouponIssuanceRequestCommand.Request
     ): Response {
-        var result = couponRedisRepository.requestIssueCoupon(request.data)
-        return CouponIssuanceRequestCommand.Response(request.data)
+        var result = couponRedisRepository.requestIssueCoupon(request.userId)
+        return CouponIssuanceRequestCommand.Response(request.userId)
+    }
+
+    fun requestPreGeneratedCouponIssuance(
+        request: CouponIssuanceRequestCommand.Request
+    ): Response {
+        var result = couponRedisRepository.requestPreGeneratedCouponIssuance(request.userId)
+        return CouponIssuanceRequestCommand.Response(result)
     }
 }

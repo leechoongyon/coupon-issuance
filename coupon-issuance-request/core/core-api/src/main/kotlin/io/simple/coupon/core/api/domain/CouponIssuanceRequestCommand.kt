@@ -3,7 +3,7 @@ package io.simple.coupon.core.api.domain
 class CouponIssuanceRequestCommand {
 
     class Request(
-        val data: String
+        val userId: String
     ) {
 
     }
