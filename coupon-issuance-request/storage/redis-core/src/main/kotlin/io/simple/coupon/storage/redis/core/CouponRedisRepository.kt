@@ -40,10 +40,14 @@ class CouponRedisRepository(
             if check == 1 then
                 return "exist"
             end
-
+           
             -- Set에서 쿠폰 ID를 가져와서 제거
             local couponId = redis.call('SPOP', KEYS[1])
-
+            
+            if not couponId or couponId == nil then
+                return "empty"
+            end
+            
             -- Hash에 쿠폰 ID를 저장
             redis.call('HSET', KEYS[2], ARGV[1], couponId)
 
@@ -64,11 +68,15 @@ class CouponRedisRepository(
         return Optional.ofNullable(result).orElse(Strings.EMPTY)
     }
 
+    /**
+     * HASH coupon-user-mapping --> userId couponId 맵핑
+     * SADD available-coupon
+     */
     fun requestPreGeneratedCouponIssuance(userId: String): String {
         val result: String? = redisTemplate.execute(
             requestPreGeneratedCouponIssuanceScript,
             listOf(AVAILABLE_COUPON_REDIS_KEY, COUPON_USER_MAPPING_REDIS_KEY),  // KEYS[1~2]
-            userId
+            userId // ARGS[1]
         )
         return Optional.ofNullable(result).orElse(Strings.EMPTY)
     }
