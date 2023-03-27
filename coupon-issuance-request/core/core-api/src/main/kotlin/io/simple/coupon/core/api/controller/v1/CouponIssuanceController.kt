@@ -11,16 +11,6 @@ import org.springframework.web.bind.annotation.RestController
 class CouponIssuanceController(
     val couponIssuanceService: CouponIssuanceService
 ) {
-//    @PostMapping("api/v1/coupon/issuance/request")
-//    fun requestCouponIssuance(
-//        @RequestBody request: CouponIssuanceRequest
-//    ): ApiResponse<CouponIssuanceResponse> {
-//        val couponIssuanceDtoMapper = Mappers.getMapper(CouponIssuanceDtoMapper::class.java)
-//        var couponIssuanceRequest = couponIssuanceDtoMapper.convertToCouponIssuanceRequest(request);
-//        var result = couponIssuanceService.requestCouponIssuance(couponIssuanceRequest);
-//        return ApiResponse.success(couponIssuanceDtoMapper.convertCouponIssuanceResponse(result))
-//    }
-
     @PostMapping("api/v1/coupon/issuance/request")
     fun requestCouponIssuance(
         @RequestBody request: CouponIssuanceDto.CouponIssuanceRequest
